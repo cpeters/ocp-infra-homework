@@ -4,5 +4,6 @@ metadata:
   name: "elasticsearch"
   namespace: "openshift-marketplace"
 spec:
+  source: "certified-operators"
   targetNamespace: "openshift-operators-redhat"
   packages: "elasticsearch-operator"
