@@ -2,24 +2,24 @@ apiVersion: machine.openshift.io/v1beta1
 kind: MachineSet
 metadata:
   labels:
-    machine.openshift.io/cluster-api-cluster: cluster-b683-trzh5
-  name: cluster-b683-trzh5-infra-us-east-2b
+    machine.openshift.io/cluster-api-cluster: cluster-b683-rxndc
+  name: cluster-b683-rxndc-infra-us-east-2b
 spec:
   replicas: 1
   selector:
     matchLabels:
-      machine.openshift.io/cluster-api-cluster: cluster-b683-trzh5
+      machine.openshift.io/cluster-api-cluster: cluster-b683-rxndc
       machine.openshift.io/cluster-api-machine-role: worker
       machine.openshift.io/cluster-api-machine-type: worker
-      machine.openshift.io/cluster-api-machineset: cluster-b683-trzh5-infra-us-east-2b
+      machine.openshift.io/cluster-api-machineset: cluster-b683-rxndc-infra-us-east-2b
   template:
     metadata:
       creationTimestamp: null
       labels:
-        machine.openshift.io/cluster-api-cluster: cluster-b683-trzh5
+        machine.openshift.io/cluster-api-cluster: cluster-b683-rxndc
         machine.openshift.io/cluster-api-machine-role: worker
         machine.openshift.io/cluster-api-machine-type: worker
-        machine.openshift.io/cluster-api-machineset: cluster-b683-trzh5-infra-us-east-2b
+        machine.openshift.io/cluster-api-machineset: cluster-b683-rxndc-infra-us-east-2b
     spec:
       metadata:
         creationTimestamp: null
@@ -40,7 +40,7 @@ spec:
             name: aws-cloud-credentials
           deviceIndex: 0
           iamInstanceProfile:
-            id: cluster-b683-trzh5-worker-profile
+            id: cluster-b683-rxndc-worker-profile
           instanceType: m4.xlarge
           kind: AWSMachineProviderConfig
           metadata:
@@ -53,14 +53,14 @@ spec:
           - filters:
             - name: tag:Name
               values:
-              - cluster-b683-trzh5-worker-sg
+              - cluster-b683-rxndc-worker-sg
           subnet:
             filters:
             - name: tag:Name
               values:
-              - cluster-b683-trzh5-private-us-east-2b
+              - cluster-b683-rxndc-private-us-east-2b
           tags:
-          - name: kubernetes.io/cluster/cluster-b683-trzh5
+          - name: kubernetes.io/cluster/cluster-b683-rxndc
             value: owned
           userDataSecret:
             name: worker-user-data
