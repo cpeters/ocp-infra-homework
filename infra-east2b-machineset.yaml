@@ -1,0 +1,66 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  labels:
+    machine.openshift.io/cluster-api-cluster: cluster-b683-trzh5
+  name: cluster-b683-trzh5-infra-us-east-2b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: cluster-b683-trzh5
+      machine.openshift.io/cluster-api-machine-role: worker
+      machine.openshift.io/cluster-api-machine-type: worker
+      machine.openshift.io/cluster-api-machineset: cluster-b683-trzh5-infra-us-east-2b
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        machine.openshift.io/cluster-api-cluster: cluster-b683-trzh5
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: cluster-b683-trzh5-infra-us-east-2b
+    spec:
+      metadata:
+        creationTimestamp: null
+        labels:
+          logging: "elasticsearch" 
+          node-role.kubernetes.io/infra: ""
+      providerSpec:
+        value:
+          ami:
+            id: ami-0649fd5d42859bdfc
+          apiVersion: awsproviderconfig.openshift.io/v1beta1
+          blockDevices:
+          - ebs:
+              iops: 0
+              volumeSize: 120
+              volumeType: gp2
+          credentialsSecret:
+            name: aws-cloud-credentials
+          deviceIndex: 0
+          iamInstanceProfile:
+            id: cluster-b683-trzh5-worker-profile
+          instanceType: m4.xlarge
+          kind: AWSMachineProviderConfig
+          metadata:
+            creationTimestamp: null
+          placement:
+            availabilityZone: us-east-2b
+            region: us-east-2
+          publicIp: null
+          securityGroups:
+          - filters:
+            - name: tag:Name
+              values:
+              - cluster-b683-trzh5-worker-sg
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - cluster-b683-trzh5-private-us-east-2b
+          tags:
+          - name: kubernetes.io/cluster/cluster-b683-trzh5
+            value: owned
+          userDataSecret:
+            name: worker-user-data
