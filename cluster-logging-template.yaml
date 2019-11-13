@@ -1,48 +1,37 @@
-apiVersion: v1
-items:
-- apiVersion: logging.openshift.io/v1
-  kind: ClusterLogging
-  metadata:
-    creationTimestamp: "2019-11-04T17:18:02Z"
-    generation: 1
-    name: instance
-    namespace: openshift-logging
-    resourceVersion: "58539"
-    selfLink: /apis/logging.openshift.io/v1/namespaces/openshift-logging/clusterloggings/instance
-    uid: 0ea42806-ff27-11e9-be69-06e29302fe30
-  spec:
-    collection:
-      logs:
-        fluentd: {}
-        type: fluentd
-    curation:
-      curator:
-        nodeSelector: 
-          node-role.kubernetes.io/infra: ''
-        schedule: 30 3 * * *
-      type: curator
-    logStore:
-      elasticsearch:
-        nodeCount: 2
-        nodeSelector: 
-          node-role.kubernetes.io/infra: ''
-        redundancyPolicy: SingleRedundancy
-        resources:
-          requests:
-            cpu: 500m
-            memory: 4Gi
-        storage:
-          size: 20G
-          storageClassName: gp2
-      type: elasticsearch
-    managementState: Managed
-    visualization:
-      kibana:
-        nodeSelector: 
-          node-role.kubernetes.io/infra: ''
-        replicas: 1
-      type: kibana
-kind: List
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogging
 metadata:
-  resourceVersion: ""
-  selfLink: ""
+  name: instance
+spec:
+  collection:
+    logs:
+      fluentd:
+        resources: null
+      rsyslog:
+        resources: null
+      type: fluentd
+  curation:
+    curator:
+      resources: null
+      schedule: 30 3 * * *
+    type: curator
+  logStore:
+    elasticsearch:
+      nodeCount: 2
+      redundancyPolicy: SingleRedundancy
+      resources:
+        requests:
+          cpu: 500m
+          memory: 4Gi
+      storage:
+        size: 20G
+        storageClassName: gp2
+    type: elasticsearch
+  managementState: Managed
+  visualization:
+    kibana:
+      proxy:
+        resources: null
+      replicas: 1
+      resources: null
+    type: kibana
